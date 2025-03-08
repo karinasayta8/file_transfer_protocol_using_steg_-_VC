@@ -69,3 +69,21 @@ class Blockchain:
                 if block.data.get('file_hash') == file_hash:
                     return True
         return False
+
+    def print_chain(self):
+        """Display all blockchain transactions"""
+        print("\n🔗 Blockchain Transactions:")
+        for block in self.chain:
+            print(f"\nBlock #{block.index}")
+            print(f"Timestamp: {block.timestamp}")
+            print(f"Hash: {block.hash[:16]}...")
+            
+            if isinstance(block.data, dict):
+                print("Type:", block.data.get('type', 'unknown'))
+                if block.data.get('type') == 'transfer':
+                    print("File Hash:", block.data.get('file_hash'))
+                    print("Status:", block.data.get('status'))
+            else:
+                print("Data:", block.data[:50] + "...")
+                
+            print(f"Previous Hash: {block.previous_hash[:16]}...")
